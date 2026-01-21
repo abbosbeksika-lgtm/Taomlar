@@ -5,7 +5,7 @@ class Food(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     composition = models.TextField()
     preparation_time = models.TimeField()
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateField()
 
     def __str__(self):
         return self.title
