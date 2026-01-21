@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ food.title }} - Batafsil</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fef9f5; margin: 0; padding: 0; }
+        header { background-color: #ffb347; color: white; padding: 20px 0; text-align: center; font-size: 2em; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        main { max-width: 700px; margin: 40px auto; padding: 0 20px; }
+        .food-detail { background-color: #fff7f0; border-radius: 10px; padding: 30px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .food-detail h2 { margin-top: 0; color: #ff7f50; }
+        .food-detail p { margin: 12px 0; color: #555; line-height: 1.5; }
+        .btn { display: inline-block; margin-top: 20px; text-decoration: none; color: white; background-color: #6ab04c; padding: 10px 15px; border-radius: 5px; transition: background-color 0.2s; }
+        .btn:hover { background-color: #4a8f38; }
+        .btn-red { background-color: #ff6b6b; }
+        .btn-red:hover { background-color: #e63946; }
+        .action-buttons { margin-top: 20px; }
+        .action-buttons a { margin-right: 10px; }
+    </style>
+</head>
+<body>
+
+<header>{{ food.title }}</header>
+
+<main>
+    <div class="food-detail">
+        <h2>{{ food.title }}</h2>
+        <p><strong>Narxi:</strong> ${{ food.price }}</p>
+        <p><strong>Tarkibi:</strong> {{ food.composition }}</p>
+        <p><strong>Tayyorlash vaqti:</strong> {{ food.preparation_time|time:'H:i' }}</p>
+        <p><strong>Qo'shilgan sana:</strong> {{ food.created_at|date:"Y-m-d" }}</p>
+
+        <div class="action-buttons">
+            <a href="{% url 'update' food.id %}" class="btn">Tahrirlash</a>
+
+            <!-- Delete Form -->
+            <form action="{% url 'delete' food.id %}" method="POST" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-red">O'chirish</button>
+            </form>
+
+            <a href="{% url 'index' %}" class="btn">Orqaga</a>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

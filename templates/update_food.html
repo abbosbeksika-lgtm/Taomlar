@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taomni Yangilash</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fef9f5; margin: 0; padding: 0; }
+        header { background-color: #ffb347; color: white; padding: 20px 0; text-align: center; font-size: 2em; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        main { max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        .form-container { background-color: #fff7f0; border-radius: 10px; padding: 30px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .form-container h2 { margin-top: 0; color: #ff7f50; text-align: center; }
+        label { display: block; margin-top: 15px; color: #555; font-weight: bold; }
+        input[type="text"], input[type="number"], input[type="date"], input[type="time"], textarea { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ddd; font-size: 1em; box-sizing: border-box; }
+        textarea { resize: vertical; }
+        .btn { display: inline-block; margin-top: 20px; text-decoration: none; color: white; background-color: #6ab04c; padding: 10px 20px; border-radius: 5px; transition: background-color 0.2s; cursor: pointer; border: none; font-size: 1em; }
+        .btn:hover { background-color: #4a8f38; }
+        .btn-back { background-color: #ff6b6b; }
+        .btn-back:hover { background-color: #e63946; }
+    </style>
+</head>
+<body>
+
+<header>Taomni Yangilash</header>
+
+<main>
+    <div class="form-container">
+        <h2>Taom Ma'lumotlarini Tahrirlash</h2>
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="title">Nomi:</label>
+            <input type="text" name="title" id="title" value="{{ food.title }}" required>
+
+            <label for="price">Narxi ($):</label>
+            <input type="number" name="price" id="price" step="0.01" value="{{ food.price }}" required>
+
+            <label for="composition">Tarkibi:</label>
+            <textarea name="composition" id="composition" rows="4" required>{{ food.composition }}</textarea>
+
+            <label for="preparation_time">Tayyorlash vaqti (HH:MM):</label>
+            <input type="time" id="preparation_time" name="preparation_time" value="{{ food.preparation_time|time:'H:i' }}" required>
+
+            <label for="created_at">Qo'shilgan sana:</label>
+            <input type="date" name="created_at" id="created_at" value="{{ food.created_at|date:'Y-m-d' }}" required>
+
+            <button type="submit" class="btn">Yangilash</button>
+            <a href="{% url 'index' %}" class="btn btn-back">Orqaga</a>
+        </form>
+    </div>
+</main>
+
+</body>
+</html>

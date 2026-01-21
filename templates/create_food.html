@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yangi Taom Qo'shish</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #fef9f5; margin: 0; padding: 0; }
+        header { background-color: #ffb347; color: white; padding: 20px 0; text-align: center; font-size: 2em; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        main { max-width: 600px; margin: 40px auto; padding: 20px; background-color: #fff7f0; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #ff7f50; }
+        form { display: flex; flex-direction: column; }
+        label { margin-top: 15px; margin-bottom: 5px; font-weight: bold; color: #555; }
+        input[type="text"], input[type="number"], input[type="time"], input[type="date"], textarea { padding: 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 1em; }
+        textarea { resize: vertical; }
+        button { margin-top: 20px; padding: 12px; background-color: #6ab04c; color: white; border: none; border-radius: 5px; font-size: 1em; cursor: pointer; transition: background-color 0.2s; }
+        button:hover { background-color: #4a8f38; }
+        .back-btn { display: inline-block; margin-top: 10px; text-decoration: none; color: white; background-color: #ff7f50; padding: 8px 12px; border-radius: 5px; transition: background-color 0.2s; }
+        .back-btn:hover { background-color: #ff6347; }
+    </style>
+</head>
+<body>
+
+<header>Yangi Taom Qo'shish</header>
+
+<main>
+    <h2>Taom Qo'shish Formasi</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <label for="title">Taom nomi:</label>
+        <input type="text" id="title" name="title" required>
+
+        <label for="price">Narxi ($):</label>
+        <input type="number" id="price" name="price" step="0.01" required>
+
+        <label for="composition">Tarkibi:</label>
+        <textarea id="composition" name="composition" rows="4" required></textarea>
+
+        <label for="preparation_time">Tayyorlash vaqti (HH:MM):</label>
+        <input type="time" id="preparation_time" name="preparation_time" required>
+
+        <label for="created_at">Qo'shilgan sana:</label>
+        <input type="date" id="created_at" name="created_at" required>
+
+        <button type="submit">Qo'shish</button>
+    </form>
+
+    <a href="{% url 'index' %}" class="back-btn">Orqaga</a>
+</main>
+
+</body>
+</html>
